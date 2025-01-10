@@ -6,7 +6,6 @@ set expandtab
 set autoindent
 set smartindent
 
-
 call plug#begin('~/.vim/plugged')
 
   "Vim-live-server
@@ -19,27 +18,14 @@ call plug#begin('~/.vim/plugged')
   Plug 'mattn/emmet-vim'
   "Vim-closetag
   Plug 'alvan/vim-closetag'
-<<<<<<< HEAD
-
-call plug#end()
-
-set termguicolors
-colorscheme dracula
-
-set statusline=%f\ %m\ %r\ %=%{getcwd()}
-set laststatus=2
-
-highlight StatusLine ctermfg=white ctermbg=blue guifg=white guibg=blue 
-highlight StatusLineNC ctermfg=gray ctermbg=darkblue guifg=gray guibg=darkblue  
-=======
   "Vim-airline StatusLine
   Plug 'vim-airline/vim-airline'
+
 call plug#end()
 
 set termguicolors
 set t_Co=256
 colorscheme dracula
-
 
 let g:airline_powerline_fonts = 1 "Включить поддержку Powerline шрифтов
 let g:airline#extensions#keymap#enabled = 0 "Не показывать текущий маппинг
