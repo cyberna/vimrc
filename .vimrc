@@ -19,6 +19,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'mattn/emmet-vim'
   "Vim-closetag
   Plug 'alvan/vim-closetag'
+<<<<<<< HEAD
 
 call plug#end()
 
@@ -30,4 +31,19 @@ set laststatus=2
 
 highlight StatusLine ctermfg=white ctermbg=blue guifg=white guibg=blue 
 highlight StatusLineNC ctermfg=gray ctermbg=darkblue guifg=gray guibg=darkblue  
+=======
+  "Vim-airline StatusLine
+  Plug 'vim-airline/vim-airline'
+call plug#end()
+
+set termguicolors
+set t_Co=256
+colorscheme dracula
+
+
+let g:airline_powerline_fonts = 1 "Включить поддержку Powerline шрифтов
+let g:airline#extensions#keymap#enabled = 0 "Не показывать текущий маппинг
+let g:airline_section_z = "\ue0a1:%l/%L Col:%c" "Кастомная графа положения курсора
+let g:Powerline_symbols='unicode' "Поддержка unicode
+let g:airline#extensions#xkblayout#enabled = 0 "Про это позже расскажу
 
