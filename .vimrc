@@ -5,7 +5,9 @@ set tabstop=2
 set expandtab
 set autoindent
 set smartindent
-
+let &t_SI = "\e[6 q"  " Вертикальный курсор в режиме вставки
+let &t_EI = "\e[2 q"  " Блочный курсор в нормальном режиме
+"let &t_RI = "\e[4 q"  " Подчеркивающий курсор в режиме замены
 
 call plug#begin('~/.vim/plugged')
 
@@ -14,26 +16,14 @@ call plug#begin('~/.vim/plugged')
   "Color theme dracula
   Plug 'dracula/vim', {'as': 'dracula'}
   "Coc.nvim autocomplete
-  Plug 'neoclide/coc.nvim', {'branche': 'release'}
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
   "Emmet
   Plug 'mattn/emmet-vim'
   "Vim-closetag
   Plug 'alvan/vim-closetag'
-<<<<<<< HEAD
-
-call plug#end()
-
-set termguicolors
-colorscheme dracula
-
-set statusline=%f\ %m\ %r\ %=%{getcwd()}
-set laststatus=2
-
-highlight StatusLine ctermfg=white ctermbg=blue guifg=white guibg=blue 
-highlight StatusLineNC ctermfg=gray ctermbg=darkblue guifg=gray guibg=darkblue  
-=======
   "Vim-airline StatusLine
   Plug 'vim-airline/vim-airline'
+
 call plug#end()
 
 set termguicolors
@@ -41,9 +31,9 @@ set t_Co=256
 colorscheme dracula
 
 
-let g:airline_powerline_fonts = 1 "Включить поддержку Powerline шрифтов
-let g:airline#extensions#keymap#enabled = 0 "Не показывать текущий маппинг
-let g:airline_section_z = "\ue0a1:%l/%L Col:%c" "Кастомная графа положения курсора
-let g:Powerline_symbols='unicode' "Поддержка unicode
-let g:airline#extensions#xkblayout#enabled = 0 "Про это позже расскажу
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#keymap#enabled = 0
+let g:airline_section_z = "\ue0a1:%l/%L Col:%c"
+let g:Powerline_symbols='unicode'
+let g:airline#extensions#xkblayout#enabled = 0
 
