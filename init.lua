@@ -26,49 +26,68 @@ end
 local packer_bootstrap = ensure_packer()
 
 -- 3. Настройка плагинов
-return require("packer").startup(function(use)
+require("packer").startup(function(use)
+  -- Менеджер плагинов
   use("wbthomason/packer.nvim")
 
   -- Тема Tokyo Night
   use({
     "folke/tokyonight.nvim",
     config = function()
-      vim.cmd("colorscheme tokyonight")
+      vim.cmd("colorscheme tokyonight-night")  -- Выбор стиля темы
     end
   })
 
-  -- Treesitter (улучшенная подсветка)
+  -- Строка состояния
   use({
-    "nvim-treesitter/nvim-treesitter",
-    run = ":TSUpdate",
+    "nvim-lualine/lualine.nvim",
     config = function()
-      require("nvim-treesitter.configs").setup({
-        ensure_installed = {
-          "html",
-          "css",
-          "javascript",
-          "typescript",
-          "tsx",        -- React.js
-          "vue"         -- Vue.js
+      require("lualine").setup({
+        options = {
+          theme = "tokyonight",
+          component_separators = { left = "", right = "" },
+          section_separators = { left = "", right = "" },
         },
-        highlight = {
-          enable = true,
-          additional_vim_regex_highlighting = false,
-        },
-        indent = { enable = true },    -- Автоотступы
+        sections = {
+          lualine_a = { "mode" },
+          lualine_b = { "branch", "diff" },
+          lualine_c = { 
+            { 
+              "filename", 
+              path = 1,  -- Показывать полный путь к файлу
+              symbols = { modified = "  ", readonly = "  " }
+            }
+          },
+          lualine_x = { "encoding", "fileformat", "filetype" },
+          lualine_y = { "progress" },
+          lualine_z = { "location" }
+        }
       })
     end
   })
 
-  -- Дополнительно для Vue.js
-  use("posva/vim-vue")  -- Лучшая подсветка .vue файлов
+  -- Treesitter
+  use({
+    "nvim-treesitter/nvim-treesitter",
+    config = function()
+      require("nvim-treesitter.configs").setup({
+        ensure_installed = { "html", "css", "javascript", "tsx", "vue" },
+        highlight = { enable = true },
+        indent = { enable = true }
+      })
+      vim.cmd("TSUpdate")
+    end
+  })
+
+  -- Vue.js поддержка
+  use("posva/vim-vue")
 
   if packer_bootstrap then
     require("packer").sync()
   end
 end)
 
--- 4. Дополнительные настройки для React/JSX
+-- 4. Дополнительные настройки
 vim.filetype.add({
   extension = {
     jsx = "javascriptreact",
