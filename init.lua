@@ -1,16 +1,16 @@
 -- ~/.config/nvim/init.lua
 
--- 1. Базовые настройки Neovim
-vim.opt.number = true          -- Номера строк
-vim.opt.syntax = "ON"          -- Подсветка синтаксиса
-vim.opt.tabstop = 2            -- Ширина табуляции (пробелов)
-vim.opt.shiftwidth = 2         -- Ширина сдвига (>> и <<)
-vim.opt.expandtab = true        -- Использовать пробелы вместо табов
-vim.opt.autoindent = true       -- Автоматические отступы
-vim.opt.termguicolors = true    -- Полноцветный режим
-vim.opt.cursorline = true       -- Подсветка текущей строки
+-- 1. Базовые настройки
+vim.opt.number = true
+vim.opt.syntax = "ON"
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.expandtab = true
+vim.opt.autoindent = true
+vim.opt.termguicolors = true
+vim.opt.cursorline = true
 
--- 2. Установка менеджера плагинов Packer
+-- 2. Установка Packer
 local ensure_packer = function()
   local fn = vim.fn
   local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
@@ -25,21 +25,53 @@ end
 
 local packer_bootstrap = ensure_packer()
 
--- 3. Настройка плагинов через Packer
+-- 3. Настройка плагинов
 return require("packer").startup(function(use)
-  -- Сам Packer (обязательно)
   use("wbthomason/packer.nvim")
 
   -- Тема Tokyo Night
   use({
     "folke/tokyonight.nvim",
     config = function()
-      vim.cmd("colorscheme tokyonight") -- Установка темы
+      vim.cmd("colorscheme tokyonight")
     end
   })
 
-  -- Автоматическая синхронизация при первом запуске
+  -- Treesitter (улучшенная подсветка)
+  use({
+    "nvim-treesitter/nvim-treesitter",
+    run = ":TSUpdate",
+    config = function()
+      require("nvim-treesitter.configs").setup({
+        ensure_installed = {
+          "html",
+          "css",
+          "javascript",
+          "typescript",
+          "tsx",        -- React.js
+          "vue"         -- Vue.js
+        },
+        highlight = {
+          enable = true,
+          additional_vim_regex_highlighting = false,
+        },
+        indent = { enable = true },    -- Автоотступы
+      })
+    end
+  })
+
+  -- Дополнительно для Vue.js
+  use("posva/vim-vue")  -- Лучшая подсветка .vue файлов
+
   if packer_bootstrap then
     require("packer").sync()
   end
 end)
+
+-- 4. Дополнительные настройки для React/JSX
+vim.filetype.add({
+  extension = {
+    jsx = "javascriptreact",
+    tsx = "typescriptreact"
+  }
+})
