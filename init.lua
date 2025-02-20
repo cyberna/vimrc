@@ -34,11 +34,11 @@ require("packer").startup(function(use)
   -- Сам Packer
   use("wbthomason/packer.nvim")
 
-  -- Тема Tokyo Night
+  -- Тема Dracula
   use({
-    "folke/tokyonight.nvim",
+    "Mofiqul/dracula.nvim",
     config = function()
-      vim.cmd("colorscheme tokyonight-night")
+      vim.cmd("colorscheme dracula")
     end
   })
 
@@ -49,9 +49,9 @@ require("packer").startup(function(use)
     config = function()
       require("lualine").setup({
         options = {
-          theme = "tokyonight",
-          component_separators = { left = "", right = "" },
-          section_separators = { left = "", right = "" },
+          theme = "dracula",
+          component_separators = { left = "|", right = "|" },
+          section_separators = { left = "|", right = "|" },
         }
       })
     end
