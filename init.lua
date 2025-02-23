@@ -42,16 +42,16 @@ require("packer").startup(function(use)
     end
   })
 
-  -- Строка состояния
+   -- Строка состояния
   use({
     "nvim-lualine/lualine.nvim",
     requires = { "kyazdani42/nvim-web-devicons" },
     config = function()
       require("lualine").setup({
         options = {
-          theme = "dracula",
-          component_separators = { left = "|", right = "|" },
-          section_separators = { left = "|", right = "|" },
+          theme = "tokyonight",
+          component_separators = { left = "", right = "" },
+          section_separators = { left = "", right = "" },
         }
       })
     end
